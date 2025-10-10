@@ -1,0 +1,233 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Enum for exam types
+enum ExamType {
+  UPSC
+  JEE
+  NEET
+}
+
+// Enum for subscription tiers
+enum SubscriptionTier {
+  FREE
+  CORE_PASS
+}
+
+// User model
+model User {
+  id                String            @id @default(cuid())
+  clerkId           String            @unique
+  email             String            @unique
+  name              String?
+  subscriptionTier  SubscriptionTier  @default(FREE)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  // Relations
+  studyPlans        StudyPlan[]
+  flashcards        Flashcard[]
+  reviews           Review[]
+  quizAttempts      QuizAttempt[]
+  journalEntries    JournalEntry[]
+  streaks           Streak[]
+  subscriptions     Subscription[]
+
+  @@index([clerkId])
+}
+
+// Exam configuration
+model Exam {
+  id          String      @id @default(cuid())
+  type        ExamType    @unique
+  name        String
+  description String
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  // Relations
+  subjects    Subject[]
+  studyPlans  StudyPlan[]
+}
+
+// Subject within an exam
+model Subject {
+  id          String   @id @default(cuid())
+  examId      String
+  name        String
+  description String?
+  weightage   Int      @default(100) // For importance/priority
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  exam        Exam       @relation(fields: [examId], references: [id], onDelete: Cascade)
+  topics      Topic[]
+  flashcards  Flashcard[]
+
+  @@unique([examId, name])
+  @@index([examId])
+}
+
+// Topics within a subject
+model Topic {
+  id          String   @id @default(cuid())
+  subjectId   String
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  subject     Subject    @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  flashcards  Flashcard[]
+
+  @@unique([subjectId, name])
+  @@index([subjectId])
+}
+
+// Study plan for a user
+model StudyPlan {
+  id             String   @id @default(cuid())
+  userId         String
+  examId         String
+  targetDate     DateTime
+  hoursPerDay    Int      @default(4)
+  startDate      DateTime @default(now())
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  // Relations
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  exam           Exam     @relation(fields: [examId], references: [id])
+
+  @@index([userId])
+  @@index([examId])
+}
+
+// Flashcard model
+model Flashcard {
+  id          String   @id @default(cuid())
+  userId      String
+  subjectId   String
+  topicId     String?
+  question    String   @db.Text
+  answer      String   @db.Text
+  source      String?  // "manual" or "ai-generated"
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // SRS fields
+  easeFactor  Float    @default(2.5)
+  interval    Int      @default(0)
+  repetitions Int      @default(0)
+  nextReview  DateTime @default(now())
+
+  // Relations
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subject     Subject  @relation(fields: [subjectId], references: [id])
+  topic       Topic?   @relation(fields: [topicId], references: [id])
+  reviews     Review[]
+
+  @@index([userId])
+  @@index([subjectId])
+  @@index([nextReview])
+}
+
+// Review history
+model Review {
+  id          String   @id @default(cuid())
+  userId      String
+  flashcardId String
+  quality     Int      // 0-5 (SM-2 algorithm)
+  timeSpent   Int?     // in seconds
+  createdAt   DateTime @default(now())
+
+  // Relations
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  flashcard   Flashcard @relation(fields: [flashcardId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([flashcardId])
+  @@index([createdAt])
+}
+
+// Quiz attempts
+model QuizAttempt {
+  id          String   @id @default(cuid())
+  userId      String
+  score       Int
+  totalCards  Int
+  timeSpent   Int?     // in seconds
+  createdAt   DateTime @default(now())
+
+  // Relations
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([createdAt])
+}
+
+// Journal entries
+model JournalEntry {
+  id          String   @id @default(cuid())
+  userId      String
+  content     String   @db.Text
+  mood        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([createdAt])
+}
+
+// Streak tracking
+model Streak {
+  id             String   @id @default(cuid())
+  userId         String
+  currentStreak  Int      @default(0)
+  longestStreak  Int      @default(0)
+  lastActiveDate DateTime @default(now())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  // Relations
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId])
+  @@index([userId])
+}
+
+// Subscription management
+model Subscription {
+  id                String   @id @default(cuid())
+  userId            String
+  razorpayOrderId   String?  @unique
+  razorpayPaymentId String?  @unique
+  razorpaySignature String?
+  amount            Int
+  currency          String   @default("INR")
+  status            String   @default("pending") // pending, success, failed
+  startDate         DateTime?
+  endDate           DateTime?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  // Relations
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
