@@ -1,26 +1,67 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Focused Day (Light Theme) */
+  --background: #F9F9F7;
+  --surface: #FFFFFF;
+  --primary: #008334;
+  --secondary: #00A04A;
+  --foreground: #1C1C1A;
+  --foreground-muted: #6E6E6A;
+
+  /* Brand accent colors (stay consistent across themes) */
+  --accent-pink: #f4acb7;
+  --accent-pink-light: #ffcad4;
+  --accent-soft: #d8e2dc;
+  --accent-muted: #9d8189;
+}
+
+.dark {
+  /* Soothing Night (Dark Theme) */
+  --background: #121212;
+  --surface: #1E1E1E;
+  --primary: #3498DB;
+  --secondary: #5DADE2;
+  --foreground: #EAEAEA;
+  --foreground-muted: #888888;
+
+  /* Brand accents remain same but may need opacity adjustments */
+  --accent-pink: #f4acb7;
+  --accent-pink-light: #ffcad4;
+  --accent-soft: #2a2a2a;
+  --accent-muted: #9d8189;
 }
 
 @theme inline {
+  /* Semantic color tokens for Tailwind */
   --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
   --color-foreground: var(--foreground);
+  --color-foreground-muted: var(--foreground-muted);
+  --color-accent-pink: var(--accent-pink);
+  --color-accent-pink-light: var(--accent-pink-light);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-muted: var(--accent-muted);
+
+  /* Font variables */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+
+  /* Smooth theme transitions */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Universal color transition for smooth theme switching */
+* {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
 }

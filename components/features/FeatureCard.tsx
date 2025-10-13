@@ -9,19 +9,19 @@ interface FeatureCardProps {
 
 export function FeatureCard({ icon, title, description, tag }: FeatureCardProps) {
   return (
-    <div className="p-6 rounded-xl shadow-sm bg-white hover:shadow-md transition-shadow">
+    <div className="p-6 rounded-xl shadow-sm bg-surface hover:shadow-md transition-shadow">
       <div className="flex justify-between items-start mb-4">
-        <div className="text-[#f4acb7]">
+        <div className="text-accent-pink">
           {icon}
         </div>
         {tag && (
-          <span className="text-xs font-bold px-2 py-1 rounded-full bg-[#ffe5d9] text-[#9d8189]">
+          <span className="text-xs font-bold px-2 py-1 rounded-full bg-accent-soft text-accent-muted">
             {tag}
           </span>
         )}
       </div>
-      <h4 className="text-xl font-semibold mb-2 text-[#4a4a4a]">{title}</h4>
-      <p className="text-sm text-[#4a4a4a]">{description}</p>
+      <h4 className="text-xl font-semibold mb-2 text-foreground">{title}</h4>
+      <p className="text-sm text-foreground-muted">{description}</p>
     </div>
   )
 }

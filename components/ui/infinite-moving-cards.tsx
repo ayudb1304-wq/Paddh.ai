@@ -41,7 +41,7 @@ export const InfiniteMovingCards = ({
         {[...items, ...items].map((item, idx) => (
           <div
             key={idx}
-            className="flex-shrink-0 w-[350px] p-6 rounded-2xl bg-white/80 backdrop-blur-sm border border-[#ffcad4]/50 shadow-lg"
+            className="flex-shrink-0 w-[350px] p-6 rounded-2xl bg-surface/80 backdrop-blur-sm border border-primary/20 shadow-lg"
           >
             {item.content}
           </div>

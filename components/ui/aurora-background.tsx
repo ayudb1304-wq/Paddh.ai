@@ -31,7 +31,7 @@ export const AuroraBackground = ({ children, className = '' }: AuroraBackgroundP
               repeat: Infinity,
               ease: 'easeInOut',
             }}
-            className="absolute -top-1/2 -left-1/4 w-[800px] h-[800px] rounded-full bg-gradient-to-r from-[#f4acb7]/30 via-[#ffcad4]/20 to-transparent blur-3xl"
+            className="absolute -top-1/2 -left-1/4 w-[800px] h-[800px] rounded-full bg-gradient-to-r from-accent-pink/30 via-accent-pink-light/20 to-transparent blur-3xl"
           />
           <motion.div
             animate={{
@@ -44,7 +44,7 @@ export const AuroraBackground = ({ children, className = '' }: AuroraBackgroundP
               repeat: Infinity,
               ease: 'easeInOut',
             }}
-            className="absolute -bottom-1/2 -right-1/4 w-[1000px] h-[1000px] rounded-full bg-gradient-to-l from-[#9d8189]/20 via-[#ffe5d9]/30 to-transparent blur-3xl"
+            className="absolute -bottom-1/2 -right-1/4 w-[1000px] h-[1000px] rounded-full bg-gradient-to-l from-accent-muted/20 via-primary/10 to-transparent blur-3xl"
           />
           <motion.div
             animate={{
@@ -57,7 +57,7 @@ export const AuroraBackground = ({ children, className = '' }: AuroraBackgroundP
               repeat: Infinity,
               ease: 'easeInOut',
             }}
-            className="absolute top-1/4 right-1/3 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-[#f4acb7]/20 via-transparent to-[#d8e2dc]/30 blur-3xl"
+            className="absolute top-1/4 right-1/3 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-accent-pink/20 via-transparent to-accent-soft/30 blur-3xl"
           />
         </motion.div>
       </div>

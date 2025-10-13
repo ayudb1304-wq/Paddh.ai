@@ -33,7 +33,7 @@ export const BentoCard = ({ children, className = '', colSpan = '', rowSpan = ''
       viewport={{ once: true, margin: '-100px' }}
       transition={{ duration: 0.5 }}
       whileHover={{ scale: 1.02, y: -5 }}
-      className={`relative overflow-hidden p-6 rounded-3xl bg-white/60 backdrop-blur-sm border border-[#ffcad4]/50 shadow-lg hover:shadow-xl transition-shadow ${colSpan} ${rowSpan} ${className}`}
+      className={`relative overflow-hidden p-6 rounded-3xl bg-surface/60 backdrop-blur-sm border border-primary/20 shadow-lg hover:shadow-xl transition-shadow ${colSpan} ${rowSpan} ${className}`}
     >
       {children}
     </motion.div>

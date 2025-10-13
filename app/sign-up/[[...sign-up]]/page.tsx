@@ -7,18 +7,18 @@ import { AuroraBackground } from '@/components/ui/aurora-background'
 
 export default function SignUpPage() {
   return (
-    <div className="min-h-screen bg-[#d8e2dc] font-sans overflow-hidden">
+    <div className="min-h-screen bg-background font-sans overflow-hidden">
       {/* Header */}
       <motion.header
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="sticky top-0 px-6 py-4 flex justify-between items-center bg-[#d8e2dc]/80 backdrop-blur-md z-50"
+        className="sticky top-0 px-6 py-4 flex justify-between items-center bg-background/80 backdrop-blur-md z-50"
       >
         <Link href="/">
           <motion.h1
             whileHover={{ scale: 1.05 }}
-            className="text-2xl font-bold text-[#9d8189] cursor-pointer"
+            className="text-2xl font-bold text-accent-muted cursor-pointer"
           >
             Padh.ai
           </motion.h1>
@@ -39,7 +39,7 @@ export default function SignUpPage() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-4xl font-bold text-[#4a4a4a] mb-3"
+                className="text-4xl font-bold text-foreground mb-3"
               >
                 Start Your Journey
               </motion.h2>
@@ -47,7 +47,7 @@ export default function SignUpPage() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="text-lg text-[#4a4a4a]/80"
+                className="text-lg text-foreground-muted"
               >
                 Join thousands mastering UPSC, JEE & NEET
               </motion.p>
@@ -64,16 +64,16 @@ export default function SignUpPage() {
                 appearance={{
                   elements: {
                     rootBox: "mx-auto",
-                    card: "bg-white/90 backdrop-blur-sm shadow-2xl border border-[#ffcad4]/30",
-                    headerTitle: "text-[#4a4a4a]",
-                    headerSubtitle: "text-[#4a4a4a]/70",
-                    socialButtonsBlockButton: "border-[#ffcad4]/50 hover:bg-[#f4acb7]/10",
-                    formButtonPrimary: "bg-gradient-to-r from-[#f4acb7] to-[#ffcad4] hover:opacity-90",
-                    footerActionLink: "text-[#f4acb7] hover:text-[#9d8189]",
-                    formFieldLabel: "text-[#4a4a4a]",
-                    formFieldInput: "border-[#ffcad4]/50 focus:border-[#f4acb7]",
-                    identityPreviewText: "text-[#4a4a4a]",
-                    identityPreviewEditButton: "text-[#f4acb7]"
+                    card: "bg-surface/90 backdrop-blur-sm shadow-2xl border border-primary/20",
+                    headerTitle: "text-foreground",
+                    headerSubtitle: "text-foreground-muted",
+                    socialButtonsBlockButton: "border-primary/20 hover:bg-accent-pink/10",
+                    formButtonPrimary: "bg-gradient-to-r from-accent-pink to-accent-pink-light hover:opacity-90",
+                    footerActionLink: "text-accent-pink hover:text-accent-muted",
+                    formFieldLabel: "text-foreground",
+                    formFieldInput: "border-primary/20 focus:border-accent-pink",
+                    identityPreviewText: "text-foreground",
+                    identityPreviewEditButton: "text-accent-pink"
                   }
                 }}
               />
@@ -86,11 +86,11 @@ export default function SignUpPage() {
               transition={{ duration: 0.6, delay: 0.6 }}
               className="mt-6 text-center"
             >
-              <p className="text-[#4a4a4a]/80">
+              <p className="text-foreground-muted">
                 Already have an account?{' '}
                 <Link
                   href="/sign-in"
-                  className="text-[#f4acb7] font-semibold hover:text-[#9d8189] transition-colors"
+                  className="text-accent-pink font-semibold hover:text-accent-muted transition-colors"
                 >
                   Sign in
                 </Link>
