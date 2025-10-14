@@ -23,17 +23,117 @@ enum SubscriptionTier {
   CORE_PASS
 }
 
+// Enum for learning styles
+enum LearningStyle {
+  VISUAL
+  AUDITORY
+  READING_WRITING
+  KINESTHETIC
+}
+
+// Enum for study environment
+enum StudyEnvironment {
+  QUIET
+  BACKGROUND_MUSIC
+  STUDY_GROUP
+  CAFE
+}
+
+// Enum for productivity time
+enum ProductivityTime {
+  EARLY_MORNING
+  MORNING
+  AFTERNOON
+  EVENING
+  NIGHT
+  LATE_NIGHT
+}
+
+// Enum for goal orientation
+enum GoalOrientation {
+  MASTERY
+  PERFORMANCE
+  BALANCED
+}
+
+// Enum for feedback style
+enum FeedbackStyle {
+  ENCOURAGING
+  DIRECT
+  ANALYTICAL
+  BALANCED
+}
+
 // User model
 model User {
-  id                String            @id @default(cuid())
-  clerkId           String            @unique
-  email             String            @unique
-  name              String?
-  subscriptionTier  SubscriptionTier  @default(FREE)
-  createdAt         DateTime          @default(now())
-  updatedAt         DateTime          @updatedAt
+  id                  String            @id @default(cuid())
+  clerkId             String            @unique
+  email               String            @unique
+  name                String?
+  subscriptionTier    SubscriptionTier  @default(FREE)
+
+  // Basic onboarding fields
+  onboardingCompleted Boolean           @default(false)
+  selectedExamId      String?
+  dailyStudyHours     Int?
+  preparationLevel    String?
+  mainChallenge       String?
+  confidenceLevel     Int?
+  targetDate          DateTime?
+
+  // Personal information
+  age                 Int?
+  location            String?
+  educationalBackground String?
+  previousAttempts    Int?              @default(0)
+
+  // Multiple confusing topics (JSON array)
+  confusingTopics     Json?             // Array of {topic: string, subject: string, priority: number}
+
+  // Learning style & preferences
+  learningStyle       LearningStyle?
+  studyEnvironment    StudyEnvironment?
+  peakProductivityTime ProductivityTime?
+  preferredStudyDuration Int?           // in minutes per session
+
+  // Psychology & mental state
+  selfDisciplineLevel Int?              // 1-10 scale
+  procrastinationTriggers String[]      @default([])
+  stressLevel         Int?              // 1-10 scale
+  examAnxietyLevel    Int?              // 1-10 scale
+  burnoutHistory      Boolean           @default(false)
+  currentStressFactors String[]         @default([])
+
+  // Coping & wellness
+  copingMechanisms    String[]          @default([])
+  exerciseFrequency   String?           // daily, weekly, rarely, never
+  sleepQuality        Int?              // 1-10 scale
+  meditationPractice  Boolean           @default(false)
+
+  // Motivation & goals
+  motivationalDrivers String[]          @default([])
+  goalOrientation     GoalOrientation?
+  preferredFeedbackStyle FeedbackStyle?
+  intrinsicMotivation Int?              // 1-10 scale
+  extrinsicMotivation Int?              // 1-10 scale
+
+  // Support system
+  familySupportLevel  Int?              // 1-10 scale
+  hasPeerStudyGroup   Boolean           @default(false)
+  hasMentor           Boolean           @default(false)
+  socialSupportLevel  Int?              // 1-10 scale
+
+  // Study habits & patterns
+  consistencyLevel    Int?              // 1-10 scale
+  distractionLevel    Int?              // 1-10 scale (higher = more distracted)
+  notesTakingMethod   String?           // handwritten, digital, mind-maps, etc.
+  revisionFrequency   String?           // daily, weekly, before-tests
+
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
 
   // Relations
+  selectedExam      Exam?             @relation(fields: [selectedExamId], references: [id])
   studyPlans        StudyPlan[]
   flashcards        Flashcard[]
   reviews           Review[]
@@ -43,6 +143,7 @@ model User {
   subscriptions     Subscription[]
 
   @@index([clerkId])
+  @@index([selectedExamId])
 }
 
 // Exam configuration
@@ -57,6 +158,7 @@ model Exam {
   // Relations
   subjects    Subject[]
   studyPlans  StudyPlan[]
+  users       User[]
 }
 
 // Subject within an exam

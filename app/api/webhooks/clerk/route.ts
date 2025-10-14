@@ -20,8 +20,17 @@ export async function POST(req: Request) {
 
   // If there are no headers, error out
   if (!svix_id || !svix_timestamp || !svix_signature) {
-    return new Response('Error: Missing svix headers', {
+    return new Response(JSON.stringify({
+      error: 'Missing svix headers',
+      message: 'This endpoint requires svix headers from Clerk. Please test using Clerk Dashboard.',
+      received_headers: {
+        'svix-id': svix_id || 'missing',
+        'svix-timestamp': svix_timestamp || 'missing',
+        'svix-signature': svix_signature || 'missing'
+      }
+    }), {
       status: 400,
+      headers: { 'Content-Type': 'application/json' }
     })
   }
 

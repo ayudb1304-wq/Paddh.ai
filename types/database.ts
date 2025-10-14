@@ -83,11 +83,64 @@ export interface Database {
           first_name: string | null
           last_name: string | null
           subscription_tier: string
+
+          // Basic onboarding
+          onboarding_completed: boolean
           selected_exam_id: string | null
           exam_date: string | null
           daily_study_hours: number
           preparation_level: string
-          onboarding_completed: boolean
+          main_challenge: string | null
+          confidence_level: number | null
+
+          // Personal information
+          age: number | null
+          location: string | null
+          educational_background: string | null
+          previous_attempts: number | null
+
+          // Multiple confusing topics
+          confusing_topics: Json | null  // Array of {topic: string, subject: string, priority: number}
+
+          // Learning style & preferences
+          learning_style: string | null  // visual, auditory, reading_writing, kinesthetic
+          study_environment: string | null  // quiet, background_music, study_group, cafe
+          peak_productivity_time: string | null  // early_morning, morning, afternoon, evening, night, late_night
+          preferred_study_duration: number | null  // in minutes
+
+          // Psychology & mental state
+          self_discipline_level: number | null  // 1-10
+          procrastination_triggers: string[]
+          stress_level: number | null  // 1-10
+          exam_anxiety_level: number | null  // 1-10
+          burnout_history: boolean
+          current_stress_factors: string[]
+
+          // Coping & wellness
+          coping_mechanisms: string[]
+          exercise_frequency: string | null  // daily, weekly, rarely, never
+          sleep_quality: number | null  // 1-10
+          meditation_practice: boolean
+
+          // Motivation & goals
+          motivational_drivers: string[]
+          goal_orientation: string | null  // mastery, performance, balanced
+          preferred_feedback_style: string | null  // encouraging, direct, analytical, balanced
+          intrinsic_motivation: number | null  // 1-10
+          extrinsic_motivation: number | null  // 1-10
+
+          // Support system
+          family_support_level: number | null  // 1-10
+          has_peer_study_group: boolean
+          has_mentor: boolean
+          social_support_level: number | null  // 1-10
+
+          // Study habits & patterns
+          consistency_level: number | null  // 1-10
+          distraction_level: number | null  // 1-10
+          notes_taking_method: string | null
+          revision_frequency: string | null
+
           created_at: string
           updated_at: string
         }
@@ -98,11 +151,64 @@ export interface Database {
           first_name?: string | null
           last_name?: string | null
           subscription_tier?: string
+
+          // Basic onboarding
+          onboarding_completed?: boolean
           selected_exam_id?: string | null
           exam_date?: string | null
           daily_study_hours?: number
           preparation_level?: string
-          onboarding_completed?: boolean
+          main_challenge?: string | null
+          confidence_level?: number | null
+
+          // Personal information
+          age?: number | null
+          location?: string | null
+          educational_background?: string | null
+          previous_attempts?: number | null
+
+          // Multiple confusing topics
+          confusing_topics?: Json | null
+
+          // Learning style & preferences
+          learning_style?: string | null
+          study_environment?: string | null
+          peak_productivity_time?: string | null
+          preferred_study_duration?: number | null
+
+          // Psychology & mental state
+          self_discipline_level?: number | null
+          procrastination_triggers?: string[]
+          stress_level?: number | null
+          exam_anxiety_level?: number | null
+          burnout_history?: boolean
+          current_stress_factors?: string[]
+
+          // Coping & wellness
+          coping_mechanisms?: string[]
+          exercise_frequency?: string | null
+          sleep_quality?: number | null
+          meditation_practice?: boolean
+
+          // Motivation & goals
+          motivational_drivers?: string[]
+          goal_orientation?: string | null
+          preferred_feedback_style?: string | null
+          intrinsic_motivation?: number | null
+          extrinsic_motivation?: number | null
+
+          // Support system
+          family_support_level?: number | null
+          has_peer_study_group?: boolean
+          has_mentor?: boolean
+          social_support_level?: number | null
+
+          // Study habits & patterns
+          consistency_level?: number | null
+          distraction_level?: number | null
+          notes_taking_method?: string | null
+          revision_frequency?: string | null
+
           created_at?: string
           updated_at?: string
         }
@@ -113,11 +219,64 @@ export interface Database {
           first_name?: string | null
           last_name?: string | null
           subscription_tier?: string
+
+          // Basic onboarding
+          onboarding_completed?: boolean
           selected_exam_id?: string | null
           exam_date?: string | null
           daily_study_hours?: number
           preparation_level?: string
-          onboarding_completed?: boolean
+          main_challenge?: string | null
+          confidence_level?: number | null
+
+          // Personal information
+          age?: number | null
+          location?: string | null
+          educational_background?: string | null
+          previous_attempts?: number | null
+
+          // Multiple confusing topics
+          confusing_topics?: Json | null
+
+          // Learning style & preferences
+          learning_style?: string | null
+          study_environment?: string | null
+          peak_productivity_time?: string | null
+          preferred_study_duration?: number | null
+
+          // Psychology & mental state
+          self_discipline_level?: number | null
+          procrastination_triggers?: string[]
+          stress_level?: number | null
+          exam_anxiety_level?: number | null
+          burnout_history?: boolean
+          current_stress_factors?: string[]
+
+          // Coping & wellness
+          coping_mechanisms?: string[]
+          exercise_frequency?: string | null
+          sleep_quality?: number | null
+          meditation_practice?: boolean
+
+          // Motivation & goals
+          motivational_drivers?: string[]
+          goal_orientation?: string | null
+          preferred_feedback_style?: string | null
+          intrinsic_motivation?: number | null
+          extrinsic_motivation?: number | null
+
+          // Support system
+          family_support_level?: number | null
+          has_peer_study_group?: boolean
+          has_mentor?: boolean
+          social_support_level?: number | null
+
+          // Study habits & patterns
+          consistency_level?: number | null
+          distraction_level?: number | null
+          notes_taking_method?: string | null
+          revision_frequency?: string | null
+
           created_at?: string
           updated_at?: string
         }
