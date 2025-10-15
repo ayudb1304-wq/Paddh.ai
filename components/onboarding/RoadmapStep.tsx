@@ -95,16 +95,6 @@ export function RoadmapStep({ selectedExam, answers }: RoadmapStepProps) {
       })
     }
 
-    // Confusing topic insight
-    if (answers.confusingTopic) {
-      insights.push({
-        icon: Lightbulb,
-        title: `Mastering ${answers.confusingTopic}`,
-        description:
-          `We've prioritized this topic in your schedule with extra practice and AI-generated flashcards.`,
-      })
-    }
-
     return insights.slice(0, 3) // Return top 3 insights
   }
 
@@ -260,7 +250,6 @@ export function RoadmapStep({ selectedExam, answers }: RoadmapStepProps) {
         transition={{ duration: 0.6, delay: 1.6 }}
         className="text-sm text-foreground-muted text-center"
       >
-        Step 5 of 5 · Complete!
       </motion.p>
     </motion.div>
   )
@@ -282,27 +271,6 @@ function Brain(props: any) {
     >
       <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z" />
       <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z" />
-    </svg>
-  )
-}
-
-function Lightbulb(props: any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
-      <path d="M9 18h6" />
-      <path d="M10 22h4" />
     </svg>
   )
 }

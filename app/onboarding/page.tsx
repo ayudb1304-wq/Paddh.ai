@@ -5,6 +5,7 @@ import { AnimatePresence } from 'framer-motion'
 import { useUser } from '@clerk/nextjs'
 import { useRouter } from 'next/navigation'
 import { AuroraBackground } from '@/components/ui/aurora-background'
+import { OnboardingProgressBar } from '@/components/onboarding/OnboardingProgressBar'
 import { WelcomeStep } from '@/components/onboarding/WelcomeStep'
 import { PersonalProfileStep, PersonalProfile } from '@/components/onboarding/PersonalProfileStep'
 import { ExamSelectionStep } from '@/components/onboarding/ExamSelectionStep'
@@ -91,7 +92,6 @@ export default function OnboardingPage() {
           // Quiz answers
           mainChallenge: quizAnswers?.mainChallenge,
           confidenceLevel: quizAnswers?.confidenceLevel,
-          confusingTopics: quizAnswers?.confusingTopics,
 
           // Learning psychology
           learningStyle: learningPsychology?.learningStyle,
@@ -137,10 +137,33 @@ export default function OnboardingPage() {
     )
   }
 
+  // Calculate current step number for progress bar
+  const getStepNumber = (step: OnboardingStep): number => {
+    const stepMap: Record<OnboardingStep, number> = {
+      welcome: 1,
+      profile: 2,
+      exam: 3,
+      psychology: 4,
+      quiz: 5,
+      wellness: 6,
+      loading: 7,
+      roadmap: 8,
+    }
+    return stepMap[step]
+  }
+
+  const totalSteps = 8
+  const currentStepNumber = getStepNumber(currentStep)
+
   return (
     <div className="min-h-screen bg-background font-sans overflow-hidden">
+      {/* Progress Bar - Show for all steps except loading and roadmap */}
+      {currentStep !== 'loading' && currentStep !== 'roadmap' && (
+        <OnboardingProgressBar currentStep={currentStepNumber} totalSteps={totalSteps} />
+      )}
+
       <AuroraBackground>
-        <main className="px-8 py-12 min-h-screen flex items-center justify-center">
+        <main className="px-8 py-12 min-h-screen flex items-center justify-center pt-24">
           <AnimatePresence mode="wait">
             {currentStep === 'welcome' && (
               <WelcomeStep key="welcome" onNext={() => setCurrentStep('profile')} />
@@ -151,6 +174,7 @@ export default function OnboardingPage() {
                 key="profile"
                 onComplete={handleProfileComplete}
                 onBack={() => setCurrentStep('welcome')}
+                initialData={personalProfile}
               />
             )}
 
@@ -167,6 +191,7 @@ export default function OnboardingPage() {
                 key="psychology"
                 onComplete={handlePsychologyComplete}
                 onBack={() => setCurrentStep('exam')}
+                initialData={learningPsychology}
               />
             )}
 
@@ -176,6 +201,7 @@ export default function OnboardingPage() {
                 selectedExam={selectedExam}
                 onComplete={handleQuizComplete}
                 onBack={() => setCurrentStep('psychology')}
+                initialData={quizAnswers}
               />
             )}
 
@@ -184,6 +210,7 @@ export default function OnboardingPage() {
                 key="wellness"
                 onComplete={handleWellnessComplete}
                 onBack={() => setCurrentStep('quiz')}
+                initialData={mentalWellness}
               />
             )}
 

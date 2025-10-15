@@ -30,7 +30,6 @@ export async function POST(req: Request) {
       // Quiz answers
       mainChallenge,
       confidenceLevel,
-      confusingTopics,
 
       // Learning psychology
       learningStyle,
@@ -110,7 +109,6 @@ export async function POST(req: Request) {
         main_challenge: mainChallenge || null,
         confidence_level: confidenceLevel || null,
         preparation_level: confidenceLevel ? `${confidenceLevel}/10` : null,
-        confusing_topics: confusingTopics || null,
 
         // Learning psychology
         learning_style: learningStyle || null,
@@ -154,7 +152,6 @@ export async function POST(req: Request) {
         daily_tasks: {
           dailyHours: dailyStudyHours,
           mainChallenge: mainChallenge || null,
-          confusingTopics: confusingTopics || [],
           confidenceLevel: confidenceLevel || null,
 
           // Include psychology & wellness data for AI-powered plan generation

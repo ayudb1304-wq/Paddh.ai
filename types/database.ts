@@ -100,7 +100,6 @@ export interface Database {
           previous_attempts: number | null
 
           // Multiple confusing topics
-          confusing_topics: Json | null  // Array of {topic: string, subject: string, priority: number}
 
           // Learning style & preferences
           learning_style: string | null  // visual, auditory, reading_writing, kinesthetic
@@ -168,7 +167,6 @@ export interface Database {
           previous_attempts?: number | null
 
           // Multiple confusing topics
-          confusing_topics?: Json | null
 
           // Learning style & preferences
           learning_style?: string | null
@@ -236,7 +234,6 @@ export interface Database {
           previous_attempts?: number | null
 
           // Multiple confusing topics
-          confusing_topics?: Json | null
 
           // Learning style & preferences
           learning_style?: string | null

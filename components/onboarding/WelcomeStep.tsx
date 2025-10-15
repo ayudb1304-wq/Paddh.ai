@@ -103,14 +103,14 @@ export function WelcomeStep({ onNext }: WelcomeStepProps) {
         </motion.button>
       </motion.div>
 
-      {/* Progress Indicator */}
+      {/* Estimated Time */}
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 2.2 }}
         className="text-sm text-foreground-muted"
       >
-        Step 1 of 5 · Takes about 2 minutes
+        Takes about 2 minutes
       </motion.p>
     </motion.div>
   )

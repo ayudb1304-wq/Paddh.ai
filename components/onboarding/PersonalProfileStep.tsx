@@ -14,12 +14,15 @@ export interface PersonalProfile {
 interface PersonalProfileStepProps {
   onComplete: (profile: PersonalProfile) => void
   onBack: () => void
+  initialData?: PersonalProfile | null
 }
 
-export function PersonalProfileStep({ onComplete, onBack }: PersonalProfileStepProps) {
-  const [profile, setProfile] = useState<Partial<PersonalProfile>>({
-    previousAttempts: 0,
-  })
+export function PersonalProfileStep({ onComplete, onBack, initialData }: PersonalProfileStepProps) {
+  const [profile, setProfile] = useState<Partial<PersonalProfile>>(
+    initialData || {
+      previousAttempts: 0,
+    }
+  )
 
   const isValid =
     profile.age &&
@@ -194,8 +197,7 @@ export function PersonalProfileStep({ onComplete, onBack }: PersonalProfileStepP
       </div>
 
       {/* Navigation */}
-      <div className="flex justify-between items-center pt-4">
-        <p className="text-sm text-foreground-muted">Step 1 of 7</p>
+      <div className="flex justify-end items-center pt-4">
 
         <motion.button
           onClick={handleContinue}

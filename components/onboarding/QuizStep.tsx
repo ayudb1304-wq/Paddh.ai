@@ -5,12 +5,12 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Slider } from '@/components/ui/slider'
 import { RadioGroup } from '@/components/ui/radio-group'
 import { ArrowLeft, ArrowRight, Calendar } from 'lucide-react'
-import { MultiTopicSelector, ConfusingTopic } from './MultiTopicSelector'
 
 interface QuizStepProps {
   selectedExam: string
   onComplete: (answers: QuizAnswers) => void
   onBack: () => void
+  initialData?: QuizAnswers | null
 }
 
 export interface QuizAnswers {
@@ -18,16 +18,16 @@ export interface QuizAnswers {
   targetDate: Date
   mainChallenge: string
   confidenceLevel: number
-  confusingTopics: ConfusingTopic[]
 }
 
-export function QuizStep({ selectedExam, onComplete, onBack }: QuizStepProps) {
+export function QuizStep({ selectedExam, onComplete, onBack, initialData }: QuizStepProps) {
   const [currentQuestion, setCurrentQuestion] = useState(0)
-  const [answers, setAnswers] = useState<Partial<QuizAnswers>>({
-    dailyStudyHours: 4,
-    confidenceLevel: 5,
-    confusingTopics: [],
-  })
+  const [answers, setAnswers] = useState<Partial<QuizAnswers>>(
+    initialData || {
+      dailyStudyHours: 4,
+      confidenceLevel: 5,
+    }
+  )
 
   const questions = [
     {
@@ -126,19 +126,6 @@ export function QuizStep({ selectedExam, onComplete, onBack }: QuizStepProps) {
         />
       ),
     },
-    {
-      id: 'confusingTopics',
-      title: 'Which topics confuse you the most?',
-      subtitle: `Select up to 5 topics. We'll prioritize helping you master these in order.`,
-      component: (
-        <MultiTopicSelector
-          selectedExam={selectedExam}
-          value={answers.confusingTopics || []}
-          onChange={(topics) => setAnswers({ ...answers, confusingTopics: topics })}
-          maxTopics={5}
-        />
-      ),
-    },
   ]
 
   const currentQ = questions[currentQuestion]
@@ -146,7 +133,6 @@ export function QuizStep({ selectedExam, onComplete, onBack }: QuizStepProps) {
   const canProceed =
     currentQuestion === 0 ||
     currentQuestion === 3 ||
-    currentQuestion === 4 ||
     (currentQuestion === 1 && answers.targetDate) ||
     (currentQuestion === 2 && answers.mainChallenge)
 
@@ -185,20 +171,11 @@ export function QuizStep({ selectedExam, onComplete, onBack }: QuizStepProps) {
         <span>Back</span>
       </motion.button>
 
-      {/* Progress Bar */}
-      <div className="space-y-2">
-        <div className="flex justify-between text-sm text-foreground-muted">
-          <span>Question {currentQuestion + 1} of {questions.length}</span>
-          <span>{Math.round(((currentQuestion + 1) / questions.length) * 100)}% complete</span>
-        </div>
-        <div className="h-2 bg-surface rounded-full overflow-hidden">
-          <motion.div
-            className="h-full bg-gradient-to-r from-accent-pink to-accent-pink-light"
-            initial={{ width: 0 }}
-            animate={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
-            transition={{ duration: 0.5 }}
-          />
-        </div>
+      {/* Question Progress */}
+      <div className="text-center">
+        <span className="text-sm text-foreground-muted">
+          Question {currentQuestion + 1} of {questions.length}
+        </span>
       </div>
 
       {/* Question */}
@@ -225,11 +202,7 @@ export function QuizStep({ selectedExam, onComplete, onBack }: QuizStepProps) {
       </AnimatePresence>
 
       {/* Navigation Buttons */}
-      <div className="flex justify-between items-center pt-8">
-        <p className="text-sm text-foreground-muted">
-          Step 3 of 5
-        </p>
-
+      <div className="flex justify-end items-center pt-8">
         <motion.button
           onClick={handleNext}
           disabled={!canProceed}

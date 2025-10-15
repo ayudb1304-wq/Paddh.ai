@@ -19,22 +19,25 @@ import {
 } from 'lucide-react'
 
 export interface LearningPsychology {
-  learningStyle: 'visual' | 'auditory' | 'reading_writing' | 'kinesthetic'
-  studyEnvironment: 'quiet' | 'background_music' | 'study_group' | 'cafe'
-  peakProductivityTime: 'early_morning' | 'morning' | 'afternoon' | 'evening' | 'night' | 'late_night'
+  learningStyle: 'VISUAL' | 'AUDITORY' | 'READING_WRITING' | 'KINESTHETIC'
+  studyEnvironment: 'QUIET' | 'BACKGROUND_MUSIC' | 'STUDY_GROUP' | 'CAFE'
+  peakProductivityTime: 'EARLY_MORNING' | 'MORNING' | 'AFTERNOON' | 'EVENING' | 'NIGHT' | 'LATE_NIGHT'
   selfDisciplineLevel: number
 }
 
 interface LearningPsychologyStepProps {
   onComplete: (psychology: LearningPsychology) => void
   onBack: () => void
+  initialData?: LearningPsychology | null
 }
 
-export function LearningPsychologyStep({ onComplete, onBack }: LearningPsychologyStepProps) {
+export function LearningPsychologyStep({ onComplete, onBack, initialData }: LearningPsychologyStepProps) {
   const [currentQuestion, setCurrentQuestion] = useState(0)
-  const [psychology, setPsychology] = useState<Partial<LearningPsychology>>({
-    selfDisciplineLevel: 5,
-  })
+  const [psychology, setPsychology] = useState<Partial<LearningPsychology>>(
+    initialData || {
+      selfDisciplineLevel: 5,
+    }
+  )
 
   const questions = [
     {
@@ -43,25 +46,25 @@ export function LearningPsychologyStep({ onComplete, onBack }: LearningPsycholog
       subtitle: 'Understanding your learning style helps us customize content delivery',
       options: [
         {
-          value: 'visual',
+          value: 'VISUAL',
           icon: Eye,
           label: 'Visual Learner',
           description: 'Diagrams, charts, images, and visual content'
         },
         {
-          value: 'auditory',
+          value: 'AUDITORY',
           icon: Ear,
           label: 'Auditory Learner',
           description: 'Lectures, discussions, and verbal explanations'
         },
         {
-          value: 'reading_writing',
+          value: 'READING_WRITING',
           icon: BookOpen,
           label: 'Reading/Writing',
           description: 'Text, notes, lists, and written materials'
         },
         {
-          value: 'kinesthetic',
+          value: 'KINESTHETIC',
           icon: Hand,
           label: 'Kinesthetic Learner',
           description: 'Hands-on practice and real-world examples'
@@ -74,25 +77,25 @@ export function LearningPsychologyStep({ onComplete, onBack }: LearningPsycholog
       subtitle: "We'll suggest study techniques that match your preferences",
       options: [
         {
-          value: 'quiet',
+          value: 'QUIET',
           icon: Moon,
           label: 'Complete Silence',
           description: 'Library-like quiet for maximum focus'
         },
         {
-          value: 'background_music',
+          value: 'BACKGROUND_MUSIC',
           icon: Music,
           label: 'Background Music',
           description: 'Soft music or ambient sounds'
         },
         {
-          value: 'study_group',
+          value: 'STUDY_GROUP',
           icon: Users,
           label: 'Study Group',
           description: 'Learning with peers and discussions'
         },
         {
-          value: 'cafe',
+          value: 'CAFE',
           icon: Coffee,
           label: 'Café/Light Noise',
           description: 'Gentle background chatter and activity'
@@ -105,37 +108,37 @@ export function LearningPsychologyStep({ onComplete, onBack }: LearningPsycholog
       subtitle: "We'll schedule important topics during your peak hours",
       options: [
         {
-          value: 'early_morning',
+          value: 'EARLY_MORNING',
           icon: Sun,
           label: 'Early Morning',
           description: '4 AM - 7 AM (The early bird)'
         },
         {
-          value: 'morning',
+          value: 'MORNING',
           icon: Sun,
           label: 'Morning',
           description: '7 AM - 12 PM (Morning person)'
         },
         {
-          value: 'afternoon',
+          value: 'AFTERNOON',
           icon: Sun,
           label: 'Afternoon',
           description: '12 PM - 5 PM (Midday energy)'
         },
         {
-          value: 'evening',
+          value: 'EVENING',
           icon: Sunset,
           label: 'Evening',
           description: '5 PM - 9 PM (Post-dinner focus)'
         },
         {
-          value: 'night',
+          value: 'NIGHT',
           icon: Moon,
           label: 'Night',
           description: '9 PM - 12 AM (Night owl)'
         },
         {
-          value: 'late_night',
+          value: 'LATE_NIGHT',
           icon: Moon,
           label: 'Late Night',
           description: '12 AM - 4 AM (Midnight warrior)'
@@ -195,7 +198,7 @@ export function LearningPsychologyStep({ onComplete, onBack }: LearningPsycholog
 
       {/* Progress Bar */}
       <div className="space-y-2">
-        <div className="flex justify-between text-sm text-foreground-muted">
+        <div className="flex justify-end text-sm text-foreground-muted">
           <span>Question {currentQuestion + 1} of {questions.length}</span>
           <span>{Math.round(((currentQuestion + 1) / questions.length) * 100)}% complete</span>
         </div>
@@ -293,8 +296,7 @@ export function LearningPsychologyStep({ onComplete, onBack }: LearningPsycholog
       </AnimatePresence>
 
       {/* Navigation */}
-      <div className="flex justify-between items-center pt-8">
-        <p className="text-sm text-foreground-muted">Step 3 of 7</p>
+      <div className="flex justify-end items-center pt-8">
 
         <motion.button
           onClick={handleNext}

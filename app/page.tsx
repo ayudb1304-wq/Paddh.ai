@@ -9,6 +9,7 @@ import { TextReveal } from '@/components/ui/text-reveal'
 import { Typewriter } from '@/components/ui/typewriter'
 import { InfiniteMovingCards } from '@/components/ui/infinite-moving-cards'
 import { BentoGrid, BentoCard } from '@/components/ui/bento-grid'
+//import { AnimatedNeetCard } from '@/components/features/AnimatedNeetCard'
 import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 
 export default function Home() {
@@ -288,7 +289,7 @@ export default function Home() {
               whileHover={{ scale: 1.05, y: -5 }}
               className="p-8 rounded-3xl bg-surface/80 backdrop-blur-sm border border-primary/20 shadow-xl"
             >
-              <Zap className="text-accent-pink mb-6" size={48} />
+              <BrainCircuit className="text-accent-pink mb-6" size={48} />
               <h4 className="text-2xl font-bold text-foreground mb-4">For the Problem-Solver (JEE)</h4>
               <p className="text-foreground-muted leading-relaxed">
                 We know every second counts. Your battle is against time and complexity. Padh.ai sharpens your
@@ -301,18 +302,17 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
               whileHover={{ scale: 1.05, y: -5 }}
               className="p-8 rounded-3xl bg-surface/80 backdrop-blur-sm border border-primary/20 shadow-xl"
             >
-              <BrainCircuit className="text-accent-pink mb-6" size={48} />
-              <h4 className="text-2xl font-bold text-foreground mb-4">For the Master Memorizer (NEET)</h4>
+              <Zap className="text-accent-pink mb-6" size={48} />
+              <h4 className="text-2xl font-bold text-foreground mb-4">For the Memorizer (NEET)</h4>
               <p className="text-foreground-muted leading-relaxed">
-                We know the sheer volume of information is daunting. Padh.ai helps you master a huge volume of
-                information, especially in Biology, using scientifically-proven techniques to ensure what you learn
-                stays learned.
+              We know the sheer volume of information is daunting. Padh.ai helps you master a huge volume of information, especially in Biology, using scientifically-proven techniques to ensure what you learn stays learned.
               </p>
             </motion.div>
+
           </div>
         </section>
 

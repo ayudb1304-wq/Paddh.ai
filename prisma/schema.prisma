@@ -6,8 +6,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 // Enum for exam types
@@ -75,7 +76,7 @@ model User {
   // Basic onboarding fields
   onboardingCompleted Boolean           @default(false)
   selectedExamId      String?
-  dailyStudyHours     Int?
+  dailyStudyHours     Float?
   preparationLevel    String?
   mainChallenge       String?
   confidenceLevel     Int?
@@ -86,9 +87,6 @@ model User {
   location            String?
   educationalBackground String?
   previousAttempts    Int?              @default(0)
-
-  // Multiple confusing topics (JSON array)
-  confusingTopics     Json?             // Array of {topic: string, subject: string, priority: number}
 
   // Learning style & preferences
   learningStyle       LearningStyle?
@@ -203,7 +201,7 @@ model StudyPlan {
   userId         String
   examId         String
   targetDate     DateTime
-  hoursPerDay    Int      @default(4)
+  hoursPerDay    Float    @default(4)
   startDate      DateTime @default(now())
   isActive       Boolean  @default(true)
   createdAt      DateTime @default(now())

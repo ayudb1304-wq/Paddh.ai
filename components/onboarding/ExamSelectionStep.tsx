@@ -137,7 +137,7 @@ export function ExamSelectionStep({ onSelectExam, onBack }: ExamSelectionStepPro
         transition={{ duration: 0.6, delay: 0.8 }}
         className="text-sm text-foreground-muted text-center"
       >
-        Step 2 of 5
+        Step 3 of 8
       </motion.p>
     </motion.div>
   )

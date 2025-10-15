@@ -53,12 +53,9 @@ export function LoadingStep() {
         <div className="text-2xl md:text-3xl font-bold text-foreground min-h-[3rem]">
           <Typewriter
             words={messages}
-            loop={true}
-            cursor
-            cursorStyle="|"
-            typeSpeed={70}
-            deleteSpeed={50}
-            delaySpeed={1500}
+            typingSpeed={70}
+            deletingSpeed={50}
+            delayBetweenWords={1500}
           />
         </div>
 
@@ -95,15 +92,6 @@ export function LoadingStep() {
         })}
       </div>
 
-      {/* Progress Indicator */}
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-        className="text-sm text-foreground-muted"
-      >
-        Step 4 of 5
-      </motion.p>
     </motion.div>
   )
 }

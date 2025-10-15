@@ -14,25 +14,28 @@ export interface MentalWellness {
   hasPeerStudyGroup: boolean
   hasMentor: boolean
   motivationalDrivers: string[]
-  goalOrientation: 'mastery' | 'performance' | 'balanced'
+  goalOrientation: 'MASTERY' | 'PERFORMANCE' | 'BALANCED'
 }
 
 interface MentalWellnessStepProps {
   onComplete: (wellness: MentalWellness) => void
   onBack: () => void
+  initialData?: MentalWellness | null
 }
 
-export function MentalWellnessStep({ onComplete, onBack }: MentalWellnessStepProps) {
-  const [wellness, setWellness] = useState<Partial<MentalWellness>>({
-    stressLevel: 5,
-    examAnxietyLevel: 5,
-    burnoutHistory: false,
-    copingMechanisms: [],
-    familySupportLevel: 7,
-    hasPeerStudyGroup: false,
-    hasMentor: false,
-    motivationalDrivers: [],
-  })
+export function MentalWellnessStep({ onComplete, onBack, initialData }: MentalWellnessStepProps) {
+  const [wellness, setWellness] = useState<Partial<MentalWellness>>(
+    initialData || {
+      stressLevel: 5,
+      examAnxietyLevel: 5,
+      burnoutHistory: false,
+      copingMechanisms: [],
+      familySupportLevel: 7,
+      hasPeerStudyGroup: false,
+      hasMentor: false,
+      motivationalDrivers: [],
+    }
+  )
 
   const copingOptions = [
     'Exercise',
@@ -393,12 +396,12 @@ export function MentalWellnessStep({ onComplete, onBack }: MentalWellnessStepPro
             </label>
             <div className="grid md:grid-cols-3 gap-4">
               <motion.button
-                onClick={() => setWellness({ ...wellness, goalOrientation: 'mastery' })}
+                onClick={() => setWellness({ ...wellness, goalOrientation: 'MASTERY' })}
                 whileHover={{ scale: 1.02 }}
                 className={`
                   p-4 rounded-xl transition-all
                   ${
-                    wellness.goalOrientation === 'mastery'
+                    wellness.goalOrientation === 'MASTERY'
                       ? 'bg-accent-pink/20 border-2 border-accent-pink'
                       : 'bg-surface border-2 border-primary/20'
                   }
@@ -411,12 +414,12 @@ export function MentalWellnessStep({ onComplete, onBack }: MentalWellnessStepPro
               </motion.button>
 
               <motion.button
-                onClick={() => setWellness({ ...wellness, goalOrientation: 'performance' })}
+                onClick={() => setWellness({ ...wellness, goalOrientation: 'PERFORMANCE' })}
                 whileHover={{ scale: 1.02 }}
                 className={`
                   p-4 rounded-xl transition-all
                   ${
-                    wellness.goalOrientation === 'performance'
+                    wellness.goalOrientation === 'PERFORMANCE'
                       ? 'bg-accent-pink/20 border-2 border-accent-pink'
                       : 'bg-surface border-2 border-primary/20'
                   }
@@ -429,12 +432,12 @@ export function MentalWellnessStep({ onComplete, onBack }: MentalWellnessStepPro
               </motion.button>
 
               <motion.button
-                onClick={() => setWellness({ ...wellness, goalOrientation: 'balanced' })}
+                onClick={() => setWellness({ ...wellness, goalOrientation: 'BALANCED' })}
                 whileHover={{ scale: 1.02 }}
                 className={`
                   p-4 rounded-xl transition-all
                   ${
-                    wellness.goalOrientation === 'balanced'
+                    wellness.goalOrientation === 'BALANCED'
                       ? 'bg-accent-pink/20 border-2 border-accent-pink'
                       : 'bg-surface border-2 border-primary/20'
                   }
@@ -451,8 +454,7 @@ export function MentalWellnessStep({ onComplete, onBack }: MentalWellnessStepPro
       </div>
 
       {/* Navigation */}
-      <div className="flex justify-between items-center pt-8">
-        <p className="text-sm text-foreground-muted">Step 6 of 7</p>
+      <div className="flex justify-end items-center pt-8">
 
         <motion.button
           onClick={handleContinue}
