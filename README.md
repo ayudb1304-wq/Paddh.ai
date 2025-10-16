@@ -1,10 +1,21 @@
 # Padh.ai - AI-Powered Study Platform
 
-End the anxiety. Master your exam.
+**End the anxiety. Master your exam.**
 
-Padh.ai is an AI-powered study planning and flashcard platform designed specifically for UPSC, JEE, and NEET aspirants. It provides clarity, control, and relief from exam preparation anxiety.
+Padh.ai is an AI-powered study platform designed specifically for UPSC, JEE, and NEET aspirants. We transform exam preparation from overwhelming anxiety into structured clarity with cinematic animations and intelligent learning tools.
 
-## Features
+## 🎬 Latest Update - October 16, 2025
+
+✨ **GSAP Scroll-Triggered Animations** - Experience a cinematic journey through our landing page with:
+- Sequential hero reveals with blur effects
+- Scroll-linked scrub animations
+- Pin animations for emphasis (desktop)
+- Staggered card entrances
+- Word-by-word CTA reveals
+- 60fps hardware-accelerated performance
+- Mobile-optimized responsive behavior
+
+## ✨ Features
 
 ### Free Tier
 - ✅ Multi-Exam Onboarding & Planning (UPSC/JEE/NEET)
@@ -13,21 +24,33 @@ Padh.ai is an AI-powered study planning and flashcard platform designed specific
 - ✅ Active Recall Quizzes
 - ✅ Metacognitive Journal & Streaks
 
-### Core Pass (Premium)
+### Core Pass (Premium - ₹299/month)
 - ⚡ AI Flashcard Generator (PDF/Text to Flashcards)
 - 🧠 AI-Optimized Scheduling (Personalized SRS)
 - 📊 Advanced Analytics Dashboard
 
-## Tech Stack
+## 🛠️ Tech Stack
 
-- **Framework**: Next.js 14+ (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **Database**: PostgreSQL with Prisma ORM
-- **Authentication**: Clerk
-- **Payments**: Razorpay
-- **AI**: Google Gemini API
+- **Framework**: Next.js 15.5.4 (App Router)
+- **Language**: TypeScript 5.x
+- **Styling**: Tailwind CSS v4
+- **Animations**: GSAP 3.x + Framer Motion 12.x
+- **Database**: PostgreSQL with Prisma 6.17.0
+- **Authentication**: Clerk 6.33.3
+- **Payments**: Razorpay (planned)
+- **AI**: Google Gemini API (planned)
 - **Deployment**: Vercel
+
+## 📚 Documentation
+
+**All documentation has been organized in the `/docs` folder for easy access:**
+
+- **[Documentation Hub](./docs/README.md)** - Start here for complete navigation
+- **[Project Overview](./docs/PROJECT_OVERVIEW.md)** - Complete project details and architecture
+- **[GSAP Animations Guide](./docs/features/GSAP_SCROLL_ANIMATIONS.md)** - Full animation implementation
+- **[Animation Quick Reference](./docs/features/ANIMATION_QUICK_REFERENCE.md)** - Handy animation guide
+- **[Implementation Progress](./docs/development/IMPLEMENTATION_PROGRESS.md)** - Current status tracker
+- **[Setup Guides](./docs/setup/)** - Database, Supabase, environment setup
 
 ## Getting Started
 
